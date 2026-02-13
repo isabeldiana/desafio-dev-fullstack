@@ -3,12 +3,14 @@
 ## Configuração do Ambiente (Backend)
 
 ### 1. Acesse a pasta do backend e instale dependências
+
 ```bash
 cd api
 pnpm install
 ```
 
 ### 2. Crie o arquivo `.env` na raiz do backend
+
 ```env
 # Banco de Dados
 DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
@@ -31,6 +33,7 @@ DB_NAME=dbname
 ---
 
 ### 3. Subindo o Banco de Dados com Docker
+
 ```bash
 # Subir o banco
 docker compose up -d
@@ -43,6 +46,7 @@ docker ps
 ---
 
 ### 4. Configuração do Prisma
+
 ```bash
 # Gerar o cliente Prisma
 pnpm  prisma:generate
@@ -54,6 +58,7 @@ pnpm prisma:migrate
 ---
 
 ### 5. Rodando o Backend em Desenvolvimento
+
 ```bash
 pnpm start:dev
 ```
@@ -65,11 +70,13 @@ pnpm start:dev
 ## Configuração do Ambiente (Frontend)
 
 ### 1. Acesse a pasta do frontend
+
 ```bash
 cd web
 ```
 
 ### 2. Crie o arquivo `.env.local`
+
 ```env
 # URL da API Backend
 NEXT_PUBLIC_API_URL=http://localhost:3000
@@ -81,6 +88,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3000
 ---
 
 ### 3. Instale as dependências
+
 ```bash
 pnpm install
 ```
@@ -88,6 +96,7 @@ pnpm install
 ---
 
 ### 4. Execute o Frontend em Desenvolvimento
+
 ```bash
 pnpm dev
 ```
