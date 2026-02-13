@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Lead {
+  id           String    @id @default(uuid())
+  nomeCompleto String
+  email        String    @unique
+  telefone     String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  unidades     Unidade[]
+
+  @@map("leads")
+}
+
+model Unidade {
+  id                         String    @id @default(uuid())
+  codigoDaUnidadeConsumidora String    @unique
+  modeloFasico               String
+  enquadramento              String
+  leadId                     String
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+  historicoDeConsumoEmKWH    Consumo[]
+  lead                       Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([codigoDaUnidadeConsumidora])
+  @@map("unidades")
+}
+
+model Consumo {
+  id                    String   @id @default(uuid())
+  consumoForaPontaEmKWH Float
+  mesDoConsumo          DateTime
+  unidadeId             String
+  createdAt             DateTime @default(now())
+  unidade               Unidade  @relation(fields: [unidadeId], references: [id], onDelete: Cascade)
+
+  @@unique([unidadeId, mesDoConsumo])
+  @@map("consumos")
+}
+
+enum ModeloFasico {
+  monofasico
+  bifasico
+  trifasico
+}
+
+enum Enquadramento {
+  AX
+  B1
+  B2
+  B3
+}
